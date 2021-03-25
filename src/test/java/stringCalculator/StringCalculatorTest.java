@@ -25,4 +25,10 @@ class StringCalculatorTest {
        StringCalculator str = new StringCalculator();
        assertEquals(2, str.add("1,1"));
     }
+
+    @Test
+    void takeMoreThanTwoNumbers(){
+       StringCalculator str = new StringCalculator();
+       assertEquals(3, str.add("1,1,1"));
+    }
 }

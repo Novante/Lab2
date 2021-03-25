@@ -2,14 +2,14 @@ package stringCalculator;
 
 public class StringCalculator {
 
+
     int add(String numbers) {
+        String[] num = numbers.split(",");
         int sum = 0;
 
         if (numbers.isEmpty()) {
             return 0;
         }
-
-        String[] num = numbers.split(",");
 
         for (String x : num
         ) {
@@ -18,5 +18,6 @@ public class StringCalculator {
 
         return sum;
     }
+
 
 }
