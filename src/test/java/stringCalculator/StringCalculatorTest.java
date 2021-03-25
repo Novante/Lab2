@@ -5,6 +5,7 @@ package stringCalculator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class StringCalculatorTest {
 
@@ -42,5 +43,11 @@ class StringCalculatorTest {
     void handleDifferentDelimiters(){
        StringCalculator str = new StringCalculator();
        assertEquals(3, str.add("//;\n1;2"));
+    }
+
+    @Test
+    void addWithNegativeNumber(){
+       StringCalculator str = new StringCalculator();
+       assertThrows(IllegalArgumentException.class, () -> str.add("-1,2"));
     }
 }

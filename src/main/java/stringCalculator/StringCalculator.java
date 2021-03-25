@@ -1,6 +1,6 @@
 package stringCalculator;
 
-public class StringCalculator {
+public class StringCalculator extends Exception{
 
 
     int add(String numbers) {
@@ -15,6 +15,13 @@ public class StringCalculator {
 
         if (numbers.isEmpty()) {
             return 0;
+        }
+
+        for (String x:num
+             ) {
+            if (Integer.parseInt(x) < 0){
+                throw new IllegalArgumentException("Negatives not allowed");
+            }
         }
 
         for (String x : num
