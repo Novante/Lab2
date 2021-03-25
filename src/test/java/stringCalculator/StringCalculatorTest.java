@@ -31,4 +31,10 @@ class StringCalculatorTest {
        StringCalculator str = new StringCalculator();
        assertEquals(3, str.add("1,1,1"));
     }
+
+    @Test
+    void handleNewLinesBetweenNumbers(){
+       StringCalculator str = new StringCalculator();
+       assertEquals(3, str.add("1\n1,1"));
+    }
 }
