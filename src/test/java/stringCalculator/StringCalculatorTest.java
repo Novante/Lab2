@@ -1,7 +1,6 @@
 package stringCalculator;
 
 
-
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -9,51 +8,57 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class StringCalculatorTest {
 
-   @Test
-    void takeZeroNumbers(){
+    @Test
+    void takeZeroNumbers() {
         StringCalculator str = new StringCalculator();
         assertEquals(0, str.add(""));
     }
 
     @Test
-    void takeOneNumber(){
-       StringCalculator str = new StringCalculator();
-       assertEquals(1, str.add("1"));
+    void takeOneNumber() {
+        StringCalculator str = new StringCalculator();
+        assertEquals(1, str.add("1"));
     }
 
     @Test
-    void takeTwoNumbers(){
-       StringCalculator str = new StringCalculator();
-       assertEquals(2, str.add("1,1"));
+    void takeTwoNumbers() {
+        StringCalculator str = new StringCalculator();
+        assertEquals(2, str.add("1,1"));
     }
 
     @Test
-    void takeMoreThanTwoNumbers(){
-       StringCalculator str = new StringCalculator();
-       assertEquals(3, str.add("1,1,1"));
+    void takeMoreThanTwoNumbers() {
+        StringCalculator str = new StringCalculator();
+        assertEquals(3, str.add("1,1,1"));
     }
 
     @Test
-    void handleNewLinesBetweenNumbers(){
-       StringCalculator str = new StringCalculator();
-       assertEquals(3, str.add("1\n1,1"));
+    void handleNewLinesBetweenNumbers() {
+        StringCalculator str = new StringCalculator();
+        assertEquals(3, str.add("1\n1,1"));
     }
 
     @Test
-    void handleDifferentDelimiters(){
-       StringCalculator str = new StringCalculator();
-       assertEquals(3, str.add("//;\n1;2"));
+    void handleDifferentDelimiters() {
+        StringCalculator str = new StringCalculator();
+        assertEquals(3, str.add("//;\n1;2"));
     }
 
     @Test
-    void addWithNegativeNumber(){
-       StringCalculator str = new StringCalculator();
-       assertThrows(IllegalArgumentException.class, () -> str.add("-1,2"));
+    void addWithNegativeNumber() {
+        StringCalculator str = new StringCalculator();
+        assertThrows(IllegalArgumentException.class, () -> str.add("-1,2"));
     }
 
     @Test
-    void ignoreNumbersBiggerThan1000(){
-       StringCalculator str = new StringCalculator();
-       assertEquals(2, str.add("2,1001"));
+    void ignoreNumbersBiggerThan1000() {
+        StringCalculator str = new StringCalculator();
+        assertEquals(2, str.add("2,1001"));
+    }
+
+    @Test
+    void anyLengthDelimiters() {
+        StringCalculator str = new StringCalculator();
+        assertEquals(6, str.add("//[***]\n1***2***3"));
     }
 }
