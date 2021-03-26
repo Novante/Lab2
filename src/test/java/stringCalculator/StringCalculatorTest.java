@@ -61,4 +61,10 @@ class StringCalculatorTest {
         StringCalculator str = new StringCalculator();
         assertEquals(6, str.add("//[***]\n1***2***3"));
     }
+
+    @Test
+    void anyLengthDelimiters(){
+       StringCalculator str = new StringCalculator();
+       assertEquals(6,  "//[***]\n1***2***3");
+    }
 }
