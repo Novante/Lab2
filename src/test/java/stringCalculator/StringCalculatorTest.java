@@ -68,4 +68,10 @@ class StringCalculatorTest {
         assertEquals(6, str.add("//[*][%]\n1*2%3"));
     }
 
+    @Test
+    void multipleDelimitersAboveOneChar(){
+        StringCalculator str = new StringCalculator();
+        assertEquals(6, str.add("//[******][%%%%%%%%]\n1*2%3"));
+    }
+
 }
