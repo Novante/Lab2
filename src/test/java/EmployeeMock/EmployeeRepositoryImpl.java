@@ -3,7 +3,6 @@ package EmployeeMock;
 import com.example.Employee;
 import com.example.EmployeeRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeRepositoryImpl implements EmployeeRepository {
@@ -15,6 +14,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     private List<Employee> employees;
 
     public boolean saveWasCalled = false;
+    public boolean invalidEmployee = false;
 
     public List<Employee> findAll() {
         return employees;
@@ -24,7 +24,13 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
         saveWasCalled = true;
         if (e == null) {
-            return e;
+            invalidEmployee = true;
+            return null;
+        }
+
+        if (e.getId() == null) {
+            invalidEmployee = true;
+            return null;
         }
 
         employees.add(e);

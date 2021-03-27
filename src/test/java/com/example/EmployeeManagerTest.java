@@ -39,6 +39,17 @@ class EmployeeManagerTest {
 
         Assertions.assertTrue(mockRepo.saveWasCalled);
     }
+    
+    @Test
+    void saveInvalidEmployee(){
+        setupDatabase();
+        EmployeeRepositoryImpl mockRepo = new EmployeeRepositoryImpl(employeeList);
+
+        mockRepo.save(new Employee(null, 0));
+
+        Assertions.assertTrue(mockRepo.saveWasCalled);
+        Assertions.assertTrue(mockRepo.invalidEmployee);
+    }
 
 
 }
