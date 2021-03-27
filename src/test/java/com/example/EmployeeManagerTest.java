@@ -3,10 +3,18 @@ package com.example;
 import EmployeeMock.EmployeeRepositoryImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.Mockito.*;
+
+@ExtendWith(MockitoExtension.class)
 class EmployeeManagerTest {
 
     private List<Employee> employeeList;
@@ -39,9 +47,9 @@ class EmployeeManagerTest {
 
         Assertions.assertTrue(mockRepo.saveWasCalled);
     }
-    
+
     @Test
-    void saveInvalidEmployee(){
+    void saveInvalidEmployee() {
         setupDatabase();
         EmployeeRepositoryImpl mockRepo = new EmployeeRepositoryImpl(employeeList);
 
@@ -51,5 +59,39 @@ class EmployeeManagerTest {
         Assertions.assertTrue(mockRepo.invalidEmployee);
     }
 
+    @Mock
+    private BankService bankSrv;
+    @Mock(name = "database")
+    private EmployeeRepository dbMock;
+    @InjectMocks
+    private EmployeeManager empMgr;
+
+    @Test
+    void dbMockTest() {
+        setupDatabase();
+        when(dbMock.findAll()).thenReturn(employeeList);
+
+        Assertions.assertEquals(employeeList, dbMock.findAll());
+    }
+
+    @Test
+    void payEmployees() {
+        setupDatabase();
+        when(dbMock.findAll()).thenReturn(employeeList);
+
+        empMgr.payEmployees();
+
+        Assertions.assertEquals(employeeList.size(), empMgr.payEmployees());
+    }
+
+    @Test
+    void throwEmployeeException() {
+        setupDatabase();
+        when(dbMock.findAll()).thenReturn(employeeList);
+        doThrow(RuntimeException.class).when(bankSrv).pay(anyString(), anyDouble());
+        empMgr.payEmployees();
+        verify(bankSrv, times(employeeList.size())).pay(anyString(), anyDouble());
+
+    }
 
 }
